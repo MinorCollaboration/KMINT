@@ -4,10 +4,39 @@
 #include <SDL_events.h>
 #include "SDL_timer.h"
 #include <time.h>
-
+#include "Node.h"
 #include "ExampleGameObject.h"
 
+std::vector<Node> create_graph() {
+	std::vector<Node> graph;
+	//create nodes
+	Node node1{400, 350};
+	Node node2{350,400};
+	Node node3{450,400};
+	//connect nodes
+	node1.connected_nodes.push_back(node2);
+	node2.connected_nodes.push_back(node3);
+	node3.connected_nodes.push_back(node1);
+	// add to graph
+	graph.push_back(node1);
+	graph.push_back(node2);
+	graph.push_back(node3);
 
+	return graph;
+
+}
+
+void draw_graph(FWApplication* application, std::vector<Node> graph) {
+
+	for (auto const& node : graph ) {
+		application->SetColor(Color(0, 0, 255, 255));
+		application->DrawCircle(node.x, node.y, 10, true);
+		for (auto const& connected_node : node.connected_nodes) {
+			application->SetColor(Color(0, 0, 0, 255));
+			application->DrawLine(node.x, node.y, connected_node.x, connected_node.y);
+		}
+	}
+}
 int main(int args[])
 {
 	//auto window = Window::CreateSDLWindow();
@@ -54,15 +83,8 @@ int main(int args[])
 		application->DrawText("Welcome to KMint", 400, 300);
 		
 		// Graph drawing
-		application->SetColor(Color(0, 0, 0, 255));
-		application->DrawLine(400, 350, 350, 400);
-		application->DrawLine(350, 400, 450, 400);
-		application->DrawLine(450, 400, 400, 350);
-
-		application->SetColor(Color(0, 0, 255, 255));
-		application->DrawCircle(400, 350, 10, true);
-		application->DrawCircle(350, 400, 10, true);
-		application->DrawCircle(450, 400, 10, true);
+		std::vector<Node> graph_list = create_graph();
+		draw_graph(application,graph_list);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));
@@ -74,3 +96,4 @@ int main(int args[])
 		
 	return EXIT_SUCCESS;
 }
+
