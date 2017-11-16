@@ -11,7 +11,33 @@ ExampleGameObject::~ExampleGameObject() {
 	SDL_DestroyTexture(texture);
 }
 
-void ExampleGameObject::Update(float deltaTime) {
-	const int x = (int)(sin(mApplication->GetTimeSinceStartedMS() / 300.0) * 15.0 + 400);
-	SetOffset(x, 250);
+bool ExampleGameObject::Update(float deltaTime, int x , int y) {
+	bool result = true;
+	
+
+	if (this->mX != x) {
+		if (this->mX < x) {
+			this->mX +=  1;
+
+		}
+		else {
+			this->mX -= 1;
+		}
+		result = false;
+	}
+
+	if (this->mY != y) {
+		if (this->mY < y) {
+			this->mY += 1;
+
+		}
+		else {
+			this->mY -= 1;
+		}
+		result = false;
+	}
+
+	
+	return result;
+
 }

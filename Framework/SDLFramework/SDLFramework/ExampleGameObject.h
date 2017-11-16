@@ -6,7 +6,7 @@ class ExampleGameObject : public IGameObject {
 public:
 	ExampleGameObject();
 	~ExampleGameObject();
-	void Update(float deltaTime);
+	bool Update(float deltaTime, int x, int y);
 
 private:
 	SDL_Texture *texture;

@@ -7,6 +7,8 @@
 #include "Node.h"
 #include "ExampleGameObject.h"
 
+int counter = 0;
+
 std::vector<Node> create_graph() {
 	std::vector<Node> graph;
 	//create nodes
@@ -53,6 +55,9 @@ int main(int args[])
 	// Dancing cow
 	ExampleGameObject *example = new ExampleGameObject();
 	application->AddRenderable(example);
+	example->SetSize(100,100);
+
+	
 
 	//while (true){}
 	while (application->IsRunning())
@@ -85,11 +90,24 @@ int main(int args[])
 		// Graph drawing
 		std::vector<Node> graph_list = create_graph();
 		draw_graph(application,graph_list);
-
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));
+		bool var = application->UpdateGameObjects(graph_list[counter].x, graph_list[counter].y);
+		if (var == false ) {
 
-		application->UpdateGameObjects();
+		}
+		else {
+			if (counter+1 == graph_list.size()) {
+				counter = 0;
+
+			}
+			else {
+				counter += 1;
+
+			}
+		}
+		
+		
 		application->RenderGameObjects();
 		application->EndTick();
 	}
