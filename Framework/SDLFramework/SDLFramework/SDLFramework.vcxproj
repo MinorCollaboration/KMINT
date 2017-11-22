@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="A_star.cpp" />
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Hallway.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -94,6 +95,7 @@
     <None Include="SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="A_star.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />

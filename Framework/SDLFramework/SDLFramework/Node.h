@@ -11,8 +11,10 @@ public:
 
 	Node(int x, int y) :x{ x }, y{ y } {};
 	~Node() {};
+	Node() {};
+
 	std::vector<Hallway> connected_nodes;
-	void connect_node(Node * node1, int weight);
+	void connect_node(Node * node1);
 
 private:
 

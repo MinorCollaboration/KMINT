@@ -13,26 +13,34 @@ ExampleGameObject *example1;
 
 
 
+
 std::vector<Node> create_graph() {
 	std::vector<Node> graph;
 	//create nodes
 	Node* node1 = new Node(400,350);
 	Node* node2 = new Node(350,400);
 	Node* node3 = new Node(450, 400);
+	Node* node4 = new Node(300, 300);
+
 	//connect nodes
-	node1->connect_node(node2, 1);
-	node2->connect_node(node3, 4);
-	node3->connect_node(node1, 2);
+	node1->connect_node(node2);
+	node2->connect_node(node3);
+	node3->connect_node(node1);
+	node4->connect_node(node1);
+
 
 
 	// add to graph
 	graph.push_back(*node1);
 	graph.push_back(*node2);
 	graph.push_back(*node3);
+	graph.push_back(*node4);
+
 
 	return graph;
 
 }
+
 
 
 void draw_graph(FWApplication* application, std::vector<Node> graph) {
