@@ -1,5 +1,6 @@
 
 #include <vector> 
+#include "Hallway.h"
 
 class Node
 {
@@ -10,7 +11,8 @@ public:
 
 	Node(int x, int y) :x{ x }, y{ y } {};
 	~Node() {};
-	std::vector<Node> connected_nodes;
+	std::vector<Hallway> connected_nodes;
+	void connect_node(Node * node1, int weight);
 
 private:
 

@@ -1,11 +1,14 @@
 #include "ExampleGameObject.h"
 #include <SDL_render.h>
 
-ExampleGameObject::ExampleGameObject() {
+ExampleGameObject::ExampleGameObject(int x, int y) {
 	texture = mApplication->LoadTexture("lemmling_Cartoon_cow.png");
 	this->SetTexture(texture);
 	this->SetSize(50, 50);
+	this->SetOffset(x, y);
 }
+
+
 
 ExampleGameObject::~ExampleGameObject() {
 	SDL_DestroyTexture(texture);

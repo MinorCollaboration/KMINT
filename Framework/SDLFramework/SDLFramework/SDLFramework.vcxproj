@@ -85,6 +85,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FWApplication.cpp" />
+    <ClCompile Include="Hallway.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ExampleGameObject.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />
+    <ClInclude Include="Hallway.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>

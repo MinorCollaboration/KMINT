@@ -4,7 +4,8 @@
 
 class ExampleGameObject : public IGameObject {
 public:
-	ExampleGameObject();
+	ExampleGameObject(int x, int y);
+
 	~ExampleGameObject();
 	bool Update(float deltaTime, int x, int y);
 

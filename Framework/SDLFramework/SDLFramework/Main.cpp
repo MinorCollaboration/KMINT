@@ -8,6 +8,10 @@
 #include "ExampleGameObject.h"
 
 int counter = 0;
+ExampleGameObject *example;
+ExampleGameObject *example1;
+
+
 
 std::vector<Node> create_graph() {
 	std::vector<Node> graph;
@@ -16,9 +20,11 @@ std::vector<Node> create_graph() {
 	Node node2{350,400};
 	Node node3{450,400};
 	//connect nodes
-	node1.connected_nodes.push_back(node2);
-	node2.connected_nodes.push_back(node3);
-	node3.connected_nodes.push_back(node1);
+	node1.connect_node(&node2, 1);
+	node2.connect_node(&node3, 4);
+	node3.connect_node(&node1, 2);
+
+
 	// add to graph
 	graph.push_back(node1);
 	graph.push_back(node2);
@@ -28,14 +34,16 @@ std::vector<Node> create_graph() {
 
 }
 
+
 void draw_graph(FWApplication* application, std::vector<Node> graph) {
+	graph;
 
 	for (auto const& node : graph ) {
 		application->SetColor(Color(0, 0, 255, 255));
 		application->DrawCircle(node.x, node.y, 10, true);
 		for (auto const& connected_node : node.connected_nodes) {
 			application->SetColor(Color(0, 0, 0, 255));
-			application->DrawLine(node.x, node.y, connected_node.x, connected_node.y);
+			application->DrawLine(connected_node.first_node->x , connected_node.first_node->y, connected_node.second_node->x, connected_node.second_node->y);
 		}
 	}
 }
@@ -52,10 +60,7 @@ int main(int args[])
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
 
-	// Dancing cow
-	ExampleGameObject *example = new ExampleGameObject();
-	application->AddRenderable(example);
-	example->SetSize(100,100);
+
 
 	
 
@@ -90,6 +95,14 @@ int main(int args[])
 		// Graph drawing
 		std::vector<Node> graph_list = create_graph();
 		draw_graph(application,graph_list);
+
+		// Dancing cow
+
+
+		example1 = new ExampleGameObject(graph_list[1].x, graph_list[1].y);
+		application->AddRenderable(example1);
+		example1->SetSize(100, 100);
+
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));
 		bool var = application->UpdateGameObjects(graph_list[counter].x, graph_list[counter].y);
