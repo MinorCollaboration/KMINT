@@ -16,19 +16,19 @@ ExampleGameObject *example1;
 std::vector<Node> create_graph() {
 	std::vector<Node> graph;
 	//create nodes
-	Node node1{400, 350};
-	Node node2{350,400};
-	Node node3{450,400};
+	Node* node1 = new Node(400,350);
+	Node* node2 = new Node(350,400);
+	Node* node3 = new Node(450, 400);
 	//connect nodes
-	node1.connect_node(&node2, 1);
-	node2.connect_node(&node3, 4);
-	node3.connect_node(&node1, 2);
+	node1->connect_node(node2, 1);
+	node2->connect_node(node3, 4);
+	node3->connect_node(node1, 2);
 
 
 	// add to graph
-	graph.push_back(node1);
-	graph.push_back(node2);
-	graph.push_back(node3);
+	graph.push_back(*node1);
+	graph.push_back(*node2);
+	graph.push_back(*node3);
 
 	return graph;
 
@@ -41,9 +41,9 @@ void draw_graph(FWApplication* application, std::vector<Node> graph) {
 	for (auto const& node : graph ) {
 		application->SetColor(Color(0, 0, 255, 255));
 		application->DrawCircle(node.x, node.y, 10, true);
-		for (auto const& connected_node : node.connected_nodes) {
+		for (Hallway const connected_node : node.connected_nodes) {
 			application->SetColor(Color(0, 0, 0, 255));
-			application->DrawLine(connected_node.first_node->x , connected_node.first_node->y, connected_node.second_node->x, connected_node.second_node->y);
+		application->DrawLine(connected_node.first_node->x , connected_node.first_node->y, connected_node.second_node->x, connected_node.second_node->y);
 		}
 	}
 }
