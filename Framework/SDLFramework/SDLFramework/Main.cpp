@@ -6,6 +6,7 @@
 #include <time.h>
 #include "Node.h"
 #include "ExampleGameObject.h"
+#include <cmath>
 
 int counter = 0;
 ExampleGameObject *example;
