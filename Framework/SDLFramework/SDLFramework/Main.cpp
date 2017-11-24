@@ -7,6 +7,9 @@
 #include "Node.h"
 #include "ExampleGameObject.h"
 #include <cmath>
+#include <functional>
+#include <queue>
+#include <vector>
 
 int counter = 0;
 ExampleGameObject *example;
@@ -58,6 +61,12 @@ void draw_graph(FWApplication* application, std::vector<Node> graph) {
 }
 int main(int args[])
 {
+
+	std::priority_queue<int, std::vector<Node>, std::greater<int> > q2;
+
+	for (int n : {1, 8, 5, 6, 3, 4, 0, 9, 7, 2})
+		q2.push(n, Node());
+
 	//auto window = Window::CreateSDLWindow();
 	auto application = new FWApplication();
 	if (!application->GetWindow())
