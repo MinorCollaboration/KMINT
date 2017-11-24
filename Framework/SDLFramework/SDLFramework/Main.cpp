@@ -64,8 +64,8 @@ int main(int args[])
 
 	std::priority_queue<int, std::vector<Node>, std::greater<int> > q2;
 
-	for (int n : {1, 8, 5, 6, 3, 4, 0, 9, 7, 2})
-		q2.push(n, Node());
+	//for (int n : {1, 8, 5, 6, 3, 4, 0, 9, 7, 2})
+		//q2.push(std::const_cast<Node>(n));
 
 	//auto window = Window::CreateSDLWindow();
 	auto application = new FWApplication();
@@ -79,8 +79,8 @@ int main(int args[])
 	application->SetColor(Color(255, 10, 40, 255));
 
 
-
-	
+	std::vector<Node> graph_list = create_graph();
+	example1 = new ExampleGameObject(graph_list[1].x, graph_list[1].y);
 
 	//while (true){}
 	while (application->IsRunning())
@@ -111,33 +111,22 @@ int main(int args[])
 		application->DrawText("Welcome to KMint", 400, 300);
 		
 		// Graph drawing
-		std::vector<Node> graph_list = create_graph();
 		draw_graph(application,graph_list);
 
 		// Dancing cow
 
-
-		example1 = new ExampleGameObject(graph_list[1].x, graph_list[1].y);
 		application->AddRenderable(example1);
 		example1->SetSize(100, 100);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));
 		bool var = application->UpdateGameObjects(graph_list[counter].x, graph_list[counter].y);
-		if (var == false ) {
-
-		}
-		else {
-			if (counter+1 == graph_list.size()) {
+		if (var == false) {}
+		else 
+			if (counter+1 == graph_list.size())
 				counter = 0;
-
-			}
-			else {
+			else
 				counter += 1;
-
-			}
-		}
-		
 		
 		application->RenderGameObjects();
 		application->EndTick();
